@@ -1,6 +1,6 @@
 // Boiler plate for test
 const assert = require('assert');
-// the actual file that is in the app
+// Get user model, user class. the actual file that is in the app
 const User = require("../src/user");
 
 
@@ -21,7 +21,7 @@ describe('Deleting a user', () => {
   it('model instance remove', (done) => {
     // get rid of joe - returns a 1st promise because it's messing with mongodb
     joe.deleteOne()
-        // then go back and try to find an instance of joe, another promise here
+        // nesting another promise here, or chaining a promise onthen go back and try to find an instance of joe, another promise here
       .then(() => User.findOne({name: 'Joe'})
         // then assert that the user-you-found's value us null, user isn't there. Need the { } because more than one thing is being followed.
       .then((user) => {
@@ -31,6 +31,7 @@ describe('Deleting a user', () => {
       }));
   });
 
+  // Use a class method delete when you want to remove a bunch of records
   it('class method remove', (done) => {
     // Remove a bunch of records with some given criteria
     User.deleteMany({name: 'Joe'})
@@ -41,7 +42,7 @@ describe('Deleting a user', () => {
         }))
   });
 
-  it('class method findAndRemove', (done) => {
+  it('class method findOneAndRemove', (done) => {
     // doing a class method so we'll refer to User model
     User.findOneAndRemove({ name: 'Joe'})
         .then(() => User.findOne({name: 'Joe'}))
@@ -50,10 +51,10 @@ describe('Deleting a user', () => {
   });
 });
 
-  it('class method findByName', (done) => {
+  it('class method findByIdAndRemove', (done) => {
     // Mongoose takes care of passing id's for us. object not needed. just the raw id.
     User.findByIdAndRemove(joe._id)
-      .then(() => User.findOne({name: 'Joe'}))
+      .then(() => User.findOne({name: null}))
         .then(user => {
             assert(user === null);
             done();
