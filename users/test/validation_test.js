@@ -8,7 +8,7 @@ describe('Validating records', () => {
     //   validateSync is a synchronous validation process (just validate() does not return a validation result, it needs a callback)
     // after being defined above, user has access to many methods, here we use validateSync();
       const validationResult = user.validateSync();
-    //   console.log(validationResult);
+      // console.log(validationResult);
     //   getting a hold of the error message in the error object in the console. Using a little decontstrucing
     //   const message = validationResult.errors.name.message;
     const { message } = validationResult.errors.name;
