@@ -28,4 +28,13 @@ describe('Reading users out of the DB', () => {
           });
     });
 
+    it('find a user with a particular id', (done) => {
+      // look up with a particular id
+      User.findOne({ _id: joe._id})
+      .then( user => {
+        assert(user.name === 'Joe');
+        done();
+      })
+    })
+
 });
