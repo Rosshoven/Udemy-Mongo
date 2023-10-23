@@ -11,9 +11,8 @@ const PostSchema = require('./post');
 
 // create what the Schema is
 const UserSchema = new Schema({
-    // I expect every user in my application to have a name property and i expect it to be a string: name: String,
-    
-    // name with validating the name...// Add true for name must be writtenerror message in plain english
+    // I expect every user in my application to have a name property and i expect it to be a string: name: String, 
+    // name with validating the name...// Add true for name must be written, error message in plain english
     name: {
         type: String,
         validate: {

@@ -22,6 +22,7 @@ describe('Reading users out of the DB', () => {
           .then(users => {
             // toString() needed when comparing a mongodb _id with another _id, The Big Gotcha
             assert(users[0]._id.toString() === joe._id.toString());
+            console.log(users);
             // must close it out. 
             done();
           });
