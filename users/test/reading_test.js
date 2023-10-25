@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 // the actual file that is in the app
-const User = require("../src/user");
+const User = require("../src/user_schema");
 
 describe('Reading users out of the DB', () => {
      

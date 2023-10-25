@@ -1,7 +1,7 @@
 // Make a test that shows we can create a new user and save it to the db
 
 // import User file we want to test. That file is the what creates a new user and puts it in mongo. It's the User model or User model class that we use to create a new instance of user that has the entire colklection in our data base @ const User = mongoose.model('user', UserSchema);
-const User = require('../src/user')
+const User = require('../src/user_schema')
 // import assertion capability of mocha, it's a function used in the it() block
 const assert = require('assert');
 

@@ -1,7 +1,7 @@
 // Boiler plate for test
 const assert = require('assert');
 // Get user model, user class. the actual file that is in the app
-const User = require("../src/user");
+const User = require("../src/user_schema");
 
 
 

@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 // this creates an object
 const Schema  = mongoose.Schema;
 
-// cant use import statments outside of module
+// importing the post schema...cant use import statments outside of module
 const PostSchema = require('./post_schema');
 
 
