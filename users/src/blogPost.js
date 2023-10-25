@@ -7,6 +7,7 @@ const BlogPostSchema = new Schema({
     title: String,
     content: String,
     comments: [{
+        // this is a reference to another model
         type: Schema.Types.ObjectId, 
         ref: 'Comment'
     }]
