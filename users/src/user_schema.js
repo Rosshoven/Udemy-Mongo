@@ -26,12 +26,15 @@ const UserSchema = new Schema({
     // postCount: Number,  // making this into a virtual type
     // the array [] lets  mongoose know it will be a list of records 
     posts: [PostSchema], 
+    // adding new property
     likes: Number
 });
 
-// Adding a virtual property OUTSIDE of the UserSchema. function is being named postCount. we use function() declaration so we can use 'this'
+// Adding a virtual field OUTSIDE of the UserSchema. function is being named postCount. we use function() declaration so we can use 'this'
+// Look at my userSchema and add a virtual field of 'postCount'
 UserSchema.virtual('postCount').get(function() {
     // if you want to access any properties of a particular user, you can reference this; this refers to the instance of the model we're working on. 
+    console.log('hey hey sssmnsn');
     return this.posts.length;
 });
 

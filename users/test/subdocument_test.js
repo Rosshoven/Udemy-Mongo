@@ -4,7 +4,7 @@ const User = require('../src/user_schema');
 describe('Subdocuments', () => {
 
     it('can create a subdocument', (done) => {
-        // we want to give a list of posts where each post has a title
+        // we want to give a list (use [] for an array) of posts where each post has a title
         const joe = new User({
             name: 'Joe', 
             posts: [{title: 'Post Title'}]
@@ -33,11 +33,12 @@ describe('Subdocuments', () => {
         // Fetch Joe
           .then(() => User.findOne({name: 'Joe'}))
         // Add Post to user.  Again user is what's returned from findOne() 1 line above. 
-        // Curly braces make it so the return is not automatic. Need to have a return coming
+        // Curly braces make it so the return is not automatic. Need to have a return coming. old school.
           .then((user) => {
             user.posts.push({title: 'NewNew Post'});
         // need to save - push does not save the post. 
         // have to add return statement because you're in { } which requires a return from the promise
+        // the return makes it a promise and able to continue with .then()
           return user.save();
           })
         //   find Joe
@@ -62,7 +63,7 @@ describe('Subdocuments', () => {
             // define record then remove or pull record
                 const post = user.posts[0];
                 user.posts.pull(post);
-            // have to manually call save on the user and its changes
+            // have to manually call save on the user and its changes, save whole file
                 return user.save();
               })
               .then(() => User.findOne({name: 'Joe'}))

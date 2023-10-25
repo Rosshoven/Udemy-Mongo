@@ -91,11 +91,11 @@ describe('Updating records', () => {
             // Find every user with the name of Joe, and update operator and find the postCount property
             // specify the type of operator you want to use then point it at the property you want to incrememnnt and how much you want to increment by
             // You could use $inc to decrement too, by making it a negative number
-        User.updateMany({name: 'Joe'},  { $inc: { likes: 1 } })
+        User.updateMany({name: 'Joe'},  { $inc: { likes: 10 } })
             // add in query to pull the joe model out of collection and then make assertiuon about joe's postCount 
           .then(() => User.findOne({name: 'Joe'}))
           .then((user) => {
-            assert(user.likes === 1);
+            assert(user.likes === 10);
             done();
         });
     });
