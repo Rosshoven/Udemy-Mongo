@@ -7,8 +7,13 @@ const BlogPostSchema = new Schema({
     title: String,
     content: String,
     comments: [{
-        // this is a reference to another model
+        // this is a reference to another model, ref to another collection - it's not a subdocument
         type: Schema.Types.ObjectId, 
-        ref: 'Comment'
+        // this is like 'user' on line 46 in user_schema.js
+        ref: 'comment'
     }]
 });
+
+const BlogPost = mongoose.model('blogPost', BlogPostSchema);
+
+module.exports = BlogPost;

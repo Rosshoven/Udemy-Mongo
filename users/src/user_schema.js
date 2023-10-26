@@ -25,9 +25,15 @@ const UserSchema = new Schema({
     },
     // postCount: Number,  // making this into a virtual type
     // the array [] lets  mongoose know it will be a list of records 
+    // this is a subdocument because it's taking in another schema
     posts: [PostSchema], 
     // adding new property
-    likes: Number
+    likes: Number, 
+    // grabbing the blogPost collection
+    blogPosts: [{
+        type: Schema.Types.ObjectId, 
+        ref: 'blogPost'
+    }]
 });
 
 // Adding a virtual field OUTSIDE of the UserSchema. function is being named postCount. we use function() declaration so we can use 'this'

@@ -31,20 +31,31 @@ before((done) => {
 
 
     // this is a hook that will run before each test. it has a done callback
+    // drop everything in DB beofre running tests.
     beforeEach((done) => {
+        const { users, comments, blogposts } = mongoose.connection.collections;
+
+        users.drop(() => {
+            comments.drop(() => {
+                blogposts.drop(() => {
+                    done();
+                });
+            });
+        });
+
         // direct refernece to our collection of users sitting inside our database.
         // .drop() takes all the records inside of the db and toss them out the window. clear em out.
-        mongoose.connection.collections.users.drop(() => {
+        // CODE: mongoose.connection.collections.users.drop(() => {
             // what to do once db is cleared...Ready to run the next test
-            
+
             // a connection to a db is asynchronous by nature, so you need to tell mocha to wait
             // done() is a signal to mocha that you can run the next test
-            done();
+            // CODE: done();
 
-        });
+ });
         // Any type of operation on our DB is acynchronous by nature. It takes some amount of time to complete. Mocha on the other hand, doesn't have any default idea of ascynchronous operations.
 
-    });
+    // CODE: });
 
 
     
