@@ -21,6 +21,7 @@ describe('Associations', () => {
         // Have to get these to assiociate with each other. Remember you have blogPost in User Schema
         // we're pushing in an etntire model
         // the array from the models makes it possible to push
+        // NOTE: when I comment out the below 3 lines, the collections 'comments' and 'users' comes back
         joe.blogPosts.push(blogPost);
         blogPost.comments.push(comment);
         comment.user = joe;
