@@ -7,6 +7,7 @@ const Schema  = mongoose.Schema;
 
 // importing the post schema...cant use import statments outside of module
 const PostSchema = require('./post_schema');
+const BlogPost = require('./blogPost');
 
 
 // create what the Schema is
@@ -42,6 +43,19 @@ UserSchema.virtual('postCount').get(function() {
     // if you want to access any properties of a particular user, you can reference this; this refers to the instance of the model we're working on. 
     console.log('hey hey sssmnsn');
     return this.posts.length;
+});
+
+
+// Watch for the remove event and ".pre" or before, run some function 2nd argument. function declation so we can use this. 
+// next function is to keep moving forward because this is prob gonna be asynchornous
+// specify it's document middleware with { document: true }
+UserSchema.pre('deleteOne', { document: true }, function(next) {
+    // using Blogpost means you need to import Blogpost, but if Blogpost has its own middleware it creates cyclical nature bwteen the files
+    // to avoid that, we use mongoose right here to pull the blogPost model.
+    const BlogPost = mongoose.model('blogPost');
+    // this === joe
+    BlogPost.deleteMany({ _id: { $in: this.blogPosts } })
+     .then(() => next())
 });
 
 // Mongoose says "hey mongo, do you have a collection called User? No?, ok then i'm gonna make it." first argument 'user' is what the collection is called on the mongo side of things.
