@@ -48,10 +48,11 @@ describe('Associations', () => {
     it('saves a full relation tree', (done) => {
         User.findOne({name: 'Joe'})
          .populate({ 
+            // path option says inside user we fetch we want to load this additional resource as well
             path: 'blogPosts',
             populate: {
                 path: 'comments',
-                // when we load up the comments, we want to use the comment model
+                // when we load up the comments, we want to use the comment model. which model do we use?
                 model: 'comment',
                 populate: {
                         path: 'user',
@@ -60,7 +61,8 @@ describe('Associations', () => {
             }
          })
          .then((user) => {
-            // console.log(user.blogPosts[0].comments[0]);
+            // console.log(user);
+            // console.log(user.blogPosts[0].comments[0].content);
             assert(user.name === 'Joe');
             assert(user.blogPosts[0].title === 'JS is greatS');
             assert(user.blogPosts[0].comments[0].content === 'OH BOY Congrats on the POAST');
