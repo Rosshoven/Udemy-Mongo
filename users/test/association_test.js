@@ -45,7 +45,7 @@ describe('Associations', () => {
          });
     });
 
-    it('saves a full relation tree', (done) => {
+    it.only('saves a full relation tree', (done) => {
         User.findOne({name: 'Joe'})
          .populate({ 
             // path option says inside user we fetch we want to load this additional resource as well
@@ -63,10 +63,23 @@ describe('Associations', () => {
          .then((user) => {
             // console.log(user);
             // console.log(user.blogPosts[0].comments[0].content);
+
+            const { name, blogPosts } = user;
+            const { comments, title } = blogPosts[0];
+            const { content, user: {} } = comments[0];
+            assert(name === 'Joe');
+            assert(title === 'JS is greatS');
+            assert(content === 'OH BOY Congrats on the POAST');
             assert(user.name === 'Joe');
-            assert(user.blogPosts[0].title === 'JS is greatS');
-            assert(user.blogPosts[0].comments[0].content === 'OH BOY Congrats on the POAST');
-            assert(user.blogPosts[0].comments[0].user.name === 'Joe');
+
+            console.log(name, blogPosts, comments, title, content);
+
+            // before destructuring
+            // assert(user.name === 'Joe');
+            // assert(user.blogPosts[0].title === 'JS is greatS');
+            // assert(user.blogPosts[0].comments[0].content === 'OH BOY Congrats on the POAST');
+            // assert(user.blogPosts[0].comments[0].user.name === 'Joe');
+
             done();
          })
     });
