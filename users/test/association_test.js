@@ -45,7 +45,7 @@ describe('Associations', () => {
          });
     });
 
-    it.only('saves a full relation tree', (done) => {
+    it('saves a full relation tree', (done) => {
         User.findOne({name: 'Joe'})
          .populate({ 
             // path option says inside user we fetch we want to load this additional resource as well

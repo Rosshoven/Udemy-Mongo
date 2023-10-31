@@ -46,7 +46,7 @@ UserSchema.virtual('postCount').get(function() {
 });
 
 
-// Watch for the remove event and ".pre" or before, run some function 2nd argument. function declation so we can use this. 
+// Watch for the deleteOne event and ".pre" or before, run some function 2nd argument. function declation so we can use this. 
 // next function is to keep moving forward because this is prob gonna be asynchornous
 // specify it's document middleware with { document: true }
 UserSchema.pre('deleteOne', { document: true }, function(next) {
